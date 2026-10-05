@@ -1,0 +1,15 @@
+Consider the adjacent differences d[i] = |a[i] - a[i-1]| for i = 1...n-1.
+Initially, the array is [a1, a2, ..., ak-1, ak, ..., an].
+After shifting at k, it becomes [ak, ak+1, ..., an, a1, ..., ak-1].
+So |ak - ak-1| disappears and the new difference |an - a1| appears.
+If we shift again at 2, the array becomes [a2, a3, ..., an, a1].
+Now |a2-a1| disappears, while the previously removed |ak-ak-1| appears again.
+Therefore, we can effectively remove only one original difference while adding |an-a1|.
+Since we want to minimize the maximum difference, we should remove the largest difference.
+Let mx1 be the largest adjacent difference and mx2 the second largest.
+If we don't remove mx1, the answer is simply mx1.
+If we remove mx1, the remaining largest difference is mx2.
+The new difference |an-a1| is also present, so the maximum becomes max(mx2, |an-a1|).
+Therefore, the answer is min(mx1, max(mx2, |an-a1|)).
+We only need to find the largest and second-largest adjacent differences.
+Hence the solution takes O(n) time and does not require actually performing any cyclic shifts.

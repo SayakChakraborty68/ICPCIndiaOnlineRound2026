@@ -1,0 +1,20 @@
+The key idea is to focus on the first G, call its position idx.
+If all other Gs can stay in the same bag, the answer is immediately YES.
+This is possible when the number of other Gs is at most k.
+Otherwise, we need to use both bags for the glass curios.
+Choose another G at position j which will be the first G in the second bag.
+All Gs between idx+1 and j-1 go into the first bag.
+Let their total weight be w1 (which is simply their count).
+All Is in this range can safely go into the second bag.
+Let w2 = sfx[j+1], the total weight of everything after j.
+Now choose some weight x from this suffix and put it into the first bag.
+The remaining weight w2-x goes into the second bag.
+For the first glass to survive, we need w1 + x <= k.
+For the glass at j to survive, we need w2 - x <= k.
+Therefore, x must satisfy w2-k <= x <= k-w1.
+We also restrict x to [0,w2].
+If there is a G after j, every integer weight from 0 to w2 can be formed.
+If there is no G after j, everything is iron, so only even values of x are possible.
+We check these possibilities for every G chosen as j.
+This avoids DP because the possible values of x can be characterized directly.
+The overall complexity is O(n) per test case with O(n) extra space.

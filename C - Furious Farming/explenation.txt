@@ -1,0 +1,20 @@
+First, sort the cloud positions: a1 < a2 < ... < am.
+Let l = a1 - 1 = distance needed to cover all fields on the left.
+Let r = n - am = distance needed to cover all fields on the right.
+If we move all clouds left by l, the array becomes [a1-l, ..., am-l].
+To cover the right side after that, we need to move right again, so the left movement is effectively repeated.
+Thus, moving left first costs 2*l + r.
+Similarly, if we move right first, the cost is 2*r + l.
+Therefore, the cost for covering both extremes is 2*min(l,r) + max(l,r).
+Now consider the gaps between consecutive clouds.
+For every gap, the uncovered fields are a[i]-a[i-1]-1.
+Let mx be the maximum of these gaps.
+We only need to consider the largest gap because all clouds move together, so the same movement affects every gap.
+After moving left by l, we can cover l positions of this gap.
+After moving right by r, we can cover another r positions of this gap.
+So the remaining uncovered part of the largest gap is max(0, mx-l-r).
+A right shift changes [a1,...,am] to [a1+1,...,am+1].
+A left shift changes [a1,...,am] to [a1-1,...,am-1].
+Hence the final answer is:
+ans = 2*min(l,r) + max(l,r) + max(0,mx-l-r).
+We only need sorting and one traversal, giving O(m log m) time.
